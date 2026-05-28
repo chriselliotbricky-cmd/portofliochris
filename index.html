@@ -3,173 +3,367 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Portfolio Chris-Elliot</title>
+  <title>Portfolio — Chris-Elliot Bricky Matofaly</title>
 
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link
-    href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap"
-    rel="stylesheet"
-  />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet" />
 
   <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
+    :root {
+      --navy:   #0d1b2a;
+      --ink:    #1a2b3c;
+      --accent: #3b82f6;
+      --gold:   #f0a500;
+      --light:  #f0f4f8;
+      --white:  #ffffff;
+      --muted:  #6b7f93;
+      --card-bg:#ffffff;
+      --border: #d6e0ea;
     }
 
-    html {
-      scroll-behavior: smooth;
-    }
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; }
 
     body {
-      font-family: "Poppins", sans-serif;
-      background: #f5f6fa;
-      color: #2f3640;
-      line-height: 1.6;
+      font-family: "DM Sans", sans-serif;
+      background: var(--light);
+      color: var(--ink);
+      line-height: 1.7;
     }
 
-    /* ===== HERO ===== */
+    /* ── HERO ─────────────────────────────── */
     .hero {
-      height: 100vh;
-      background: linear-gradient(
-          rgba(0, 0, 0, 0.35),
-          rgba(0, 0, 0, 0.35)
-        ),
-        url("7bb3ccb5-da62-43b8-98ff-eeed3588c34d.png")
-          center/cover no-repeat;
+      min-height: 100vh;
+      background: var(--navy);
       display: flex;
+      flex-direction: column;
       align-items: center;
       justify-content: center;
       text-align: center;
-      color: white;
-      padding: 20px;
+      padding: 40px 20px;
+      position: relative;
+      overflow: hidden;
     }
 
-    .hero-content h1 {
-      font-size: 5rem;
-      font-weight: 700;
-      line-height: 1.1;
+    /* subtle grid overlay */
+    .hero::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(59,130,246,.08) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(59,130,246,.08) 1px, transparent 1px);
+      background-size: 60px 60px;
+    }
+
+    /* glowing blob */
+    .hero::after {
+      content: "";
+      position: absolute;
+      width: 600px; height: 600px;
+      background: radial-gradient(circle, rgba(59,130,246,.18) 0%, transparent 70%);
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      pointer-events: none;
+    }
+
+    .hero-content { position: relative; z-index: 1; }
+
+    .hero-eyebrow {
+      display: inline-block;
+      font-size: .75rem;
+      font-weight: 600;
+      letter-spacing: .2em;
       text-transform: uppercase;
+      color: var(--accent);
+      background: rgba(59,130,246,.12);
+      border: 1px solid rgba(59,130,246,.3);
+      border-radius: 99px;
+      padding: 5px 16px;
+      margin-bottom: 28px;
+      animation: fadeUp .6s ease both;
+    }
+
+    .hero h1 {
+      font-family: "DM Serif Display", serif;
+      font-size: clamp(2.8rem, 7vw, 5.5rem);
+      color: var(--white);
+      line-height: 1.08;
       margin-bottom: 20px;
+      animation: fadeUp .7s .1s ease both;
     }
 
-    .hero-content p {
-      font-size: 1.2rem;
-      letter-spacing: 2px;
+    .hero h1 em {
+      font-style: italic;
+      color: var(--gold);
     }
 
-    /* ===== HEADER ===== */
+    .hero-sub {
+      font-size: 1rem;
+      color: var(--muted);
+      letter-spacing: .05em;
+      animation: fadeUp .7s .2s ease both;
+    }
+
+    .hero-divider {
+      width: 48px; height: 3px;
+      background: var(--accent);
+      border-radius: 2px;
+      margin: 28px auto;
+      animation: fadeUp .7s .3s ease both;
+    }
+
+    .hero-date {
+      font-size: .85rem;
+      color: var(--muted);
+      animation: fadeUp .7s .35s ease both;
+    }
+
+    /* ── NAV ──────────────────────────────── */
     header {
-      background: #2f3640;
-      padding: 20px;
+      background: rgba(13,27,42,.96);
+      backdrop-filter: blur(10px);
+      padding: 0 32px;
       display: flex;
       justify-content: space-between;
       align-items: center;
-      color: #fff;
+      height: 64px;
       position: sticky;
       top: 0;
       z-index: 1000;
+      border-bottom: 1px solid rgba(59,130,246,.15);
     }
 
-    header h2 {
-      font-size: 24px;
+    .logo {
+      font-family: "DM Serif Display", serif;
+      font-size: 1.25rem;
+      color: var(--white);
+      letter-spacing: .03em;
     }
 
-    header nav a {
-      margin-left: 20px;
-      color: #fff;
+    .logo span { color: var(--accent); }
+
+    nav { display: flex; gap: 6px; }
+
+    nav a {
+      color: rgba(255,255,255,.65);
       text-decoration: none;
+      font-size: .85rem;
       font-weight: 500;
-      transition: 0.3s;
+      padding: 6px 14px;
+      border-radius: 6px;
+      transition: color .2s, background .2s;
     }
 
-    header nav a:hover {
-      color: #00a8ff;
+    nav a:hover {
+      color: var(--white);
+      background: rgba(59,130,246,.15);
     }
 
-    /* ===== SECTIONS ===== */
-    section {
-      padding: 70px 20px;
-      max-width: 1000px;
-      margin: auto;
+    /* ── SECTIONS ─────────────────────────── */
+    .section-wrap {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 90px 24px;
     }
 
-    h2.section-title {
-      margin-bottom: 30px;
-      font-size: 32px;
-      color: #273c75;
-      border-left: 5px solid #273c75;
-      padding-left: 15px;
+    .section-label {
+      font-size: .7rem;
+      font-weight: 600;
+      letter-spacing: .18em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 12px;
     }
 
-    .project-card {
-      background: #fff;
-      padding: 25px;
-      margin: 20px 0;
-      border-radius: 12px;
-      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
-      transition: transform 0.3s;
+    .section-title {
+      font-family: "DM Serif Display", serif;
+      font-size: clamp(1.8rem, 4vw, 2.6rem);
+      color: var(--navy);
+      margin-bottom: 48px;
+      position: relative;
     }
 
-    .project-card:hover {
-      transform: translateY(-5px);
+    .section-title::after {
+      content: "";
+      display: block;
+      width: 40px; height: 3px;
+      background: var(--gold);
+      border-radius: 2px;
+      margin-top: 14px;
     }
 
-    .project-card h3 {
-      margin-bottom: 15px;
-      color: #192a56;
+    /* ── CARDS ────────────────────────────── */
+    .card {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 32px 36px;
+      margin-bottom: 24px;
+      box-shadow: 0 2px 12px rgba(13,27,42,.06);
+      transition: transform .25s, box-shadow .25s;
     }
 
-    .project-card p {
+    .card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 8px 28px rgba(13,27,42,.1);
+    }
+
+    .card h3 {
+      font-family: "DM Serif Display", serif;
+      font-size: 1.25rem;
+      color: var(--navy);
+      margin-bottom: 18px;
+      padding-bottom: 14px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .card p {
+      color: #3d5166;
       margin-bottom: 10px;
+      font-size: .95rem;
     }
 
+    .card p:last-child { margin-bottom: 0; }
+
+    /* stage items */
+    .stage {
+      display: flex;
+      gap: 16px;
+      padding: 16px 0;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .stage:last-child { border-bottom: none; padding-bottom: 0; }
+    .stage:first-child { padding-top: 0; }
+
+    .stage-dot {
+      width: 10px; height: 10px;
+      border-radius: 50%;
+      background: var(--accent);
+      margin-top: 7px;
+      flex-shrink: 0;
+    }
+
+    .stage-text { font-size: .95rem; color: #3d5166; }
+    .stage-text strong { color: var(--navy); display: block; margin-bottom: 4px; }
+
+    /* épreuve steps */
+    .steps { display: flex; flex-direction: column; gap: 16px; margin-top: 20px; }
+
+    .step {
+      display: flex;
+      gap: 18px;
+      align-items: flex-start;
+    }
+
+    .step-num {
+      width: 36px; height: 36px;
+      border-radius: 50%;
+      background: var(--navy);
+      color: var(--white);
+      font-family: "DM Serif Display", serif;
+      font-size: 1rem;
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .step-body { font-size: .95rem; color: #3d5166; padding-top: 5px; }
+
+    /* veille tags */
+    .tag-row { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 16px; }
+
+    .tag {
+      font-size: .75rem;
+      font-weight: 600;
+      letter-spacing: .05em;
+      text-transform: uppercase;
+      padding: 4px 12px;
+      border-radius: 99px;
+      background: rgba(59,130,246,.08);
+      border: 1px solid rgba(59,130,246,.2);
+      color: var(--accent);
+    }
+
+    /* contact */
+    .contact-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 16px;
+    }
+
+    .contact-item {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 24px 28px;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      box-shadow: 0 2px 8px rgba(13,27,42,.05);
+      transition: transform .2s;
+    }
+
+    .contact-item:hover { transform: translateY(-3px); }
+
+    .contact-icon {
+      width: 42px; height: 42px;
+      border-radius: 10px;
+      background: rgba(59,130,246,.1);
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .contact-icon svg { width: 20px; height: 20px; stroke: var(--accent); fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+
+    .contact-label { font-size: .7rem; font-weight: 600; text-transform: uppercase; letter-spacing: .1em; color: var(--muted); }
+    .contact-value { font-size: .95rem; color: var(--navy); font-weight: 500; }
+
+    /* ── FOOTER ───────────────────────────── */
     footer {
       text-align: center;
-      padding: 25px;
-      background: #2f3640;
-      color: #fff;
-      margin-top: 50px;
+      padding: 30px 20px;
+      background: var(--navy);
+      color: var(--muted);
+      font-size: .85rem;
+      border-top: 1px solid rgba(59,130,246,.12);
     }
 
-    /* ===== RESPONSIVE ===== */
-    @media (max-width: 768px) {
-      .hero-content h1 {
-        font-size: 2.8rem;
-      }
+    footer strong { color: var(--white); }
 
-      header {
-        flex-direction: column;
-      }
+    /* ── ANIMATIONS ───────────────────────── */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
 
-      header nav {
-        margin-top: 10px;
-      }
-
-      header nav a {
-        display: inline-block;
-        margin: 8px;
-      }
+    /* ── RESPONSIVE ───────────────────────── */
+    @media (max-width: 680px) {
+      header { padding: 0 16px; }
+      nav a  { padding: 6px 9px; font-size: .78rem; }
+      .section-wrap { padding: 60px 16px; }
+      .card { padding: 24px 20px; }
     }
   </style>
 </head>
-
 <body>
 
-  <!-- IMAGE DE COUVERTURE -->
+  <!-- HERO -->
   <section class="hero">
     <div class="hero-content">
-      <h1>Portfolio de l’épreuve E4</h1>
-      <p>Chris-Elliot Bricky Matofaly — Mai 2026</p>
+      <span class="hero-eyebrow">BTS SIO — Épreuve E4</span>
+      <h1>Portfolio de<br><em>Chris-Elliot</em></h1>
+      <div class="hero-divider"></div>
+      <p class="hero-sub">Bricky Matofaly</p>
+      <p class="hero-date">Mai 2026</p>
     </div>
   </section>
 
-  <!-- MENU -->
+  <!-- NAV -->
   <header>
-    <h2>Portfolio</h2>
-
+    <span class="logo">C<span>.</span>E</span>
     <nav>
       <a href="#presentation">Présentation</a>
       <a href="#journey">Parcours</a>
@@ -179,148 +373,135 @@
     </nav>
   </header>
 
-  <!-- PRESENTATION -->
-  <section id="presentation">
+  <!-- PRÉSENTATION -->
+  <div class="section-wrap" id="presentation">
+    <p class="section-label">À propos</p>
     <h2 class="section-title">Présentation</h2>
-
-    <div class="project-card">
+    <div class="card">
       <p>
         Bonjour, je m'appelle <strong>Chris-Elliot Bricky Matofaly</strong>.
-        Je suis étudiant en BTS SIO et ce portfolio présente mon parcours,
+        Je suis étudiant en <strong>BTS SIO</strong> et ce portfolio présente mon parcours,
         mes projets et mes compétences acquises durant ma formation.
       </p>
     </div>
-  </section>
+  </div>
 
   <!-- PARCOURS -->
-  <section id="journey">
+  <div class="section-wrap" id="journey">
+    <p class="section-label">Expériences</p>
     <h2 class="section-title">Parcours</h2>
+    <div class="card">
+      <h3>Stages effectués en entreprise</h3>
 
-    <div class="project-card">
-      <h3>Différents stages effectués en entreprise</h3>
+      <div class="stage">
+        <div class="stage-dot"></div>
+        <div class="stage-text">
+          <strong>Agence Régionale de Santé (ARS) — 3ème</strong>
+          Stage dans le secteur informatique : maintenance et organisation de dossiers dans une boîte mail.
+        </div>
+      </div>
 
-      <p>
-        • Stage à l'Agence Régionale de Santé (ARS) en classe de 3ème,
-        dans le secteur informatique, où je devais maintenir et organiser
-        de nombreux dossiers dans une boîte mail.
-      </p>
+      <div class="stage">
+        <div class="stage-dot"></div>
+        <div class="stage-text">
+          <strong>Noralsy — Production informatique</strong>
+          Montage et programmation d'appareils de contrôle d'accès.
+        </div>
+      </div>
 
-      <p>
-        • Stage dans la société Noralsy, dans le secteur de la production
-        informatique, où j'ai appris à monter et programmer différents
-        appareils de contrôle d’accès.
-      </p>
-
-      <p>
-        • Stage à l'hôpital Saint Joseph, dans le service informatique,
-        où j'ai brassé différents secteurs (prises réseau), participé
-        à la mise en service d’un bloc opératoire et configuré un PC
-        portable en réseau.
-      </p>
+      <div class="stage">
+        <div class="stage-dot"></div>
+        <div class="stage-text">
+          <strong>Hôpital Saint Joseph — Service informatique</strong>
+          Câblage réseau, mise en service d'un bloc opératoire et configuration d'un PC portable en réseau.
+        </div>
+      </div>
     </div>
-  </section>
+  </div>
 
   <!-- PROJETS -->
-  <section id="projects">
+  <div class="section-wrap" id="projects">
+    <p class="section-label">Travaux</p>
     <h2 class="section-title">Projets</h2>
-
-    <div class="project-card">
-      <h3>Veille technologique</h3>
-
+    <div class="card">
+      <h3>Veille technologique — Intelligence Artificielle</h3>
       <p>
-        La veille technologique que je souhaite présenter est celle de
-        l’Intelligence Artificielle.
+        L'intelligence artificielle occupe aujourd'hui une place centrale dans l'évolution
+        des technologies numériques. Elle transforme profondément les modes de travail,
+        la création de contenu, la prise de décision et les interactions humaines.
       </p>
-
       <p>
-        L’intelligence artificielle (IA) occupe aujourd’hui une place
-        centrale dans l’évolution des technologies numériques.
-        Elle transforme profondément les modes de travail,
-        la création de contenu, la prise de décision et même
-        les interactions humaines.
+        Face à cette évolution, j'ai choisi de consacrer ma veille à ses applications
+        récentes dans le développement informatique, la génération de contenu et
+        l'automatisation des tâches.
       </p>
-
-      <p>
-        Face à cette évolution, il devient indispensable de suivre
-        de près les avancées dans ce domaine pour comprendre ses enjeux
-        et anticiper ses impacts.
-      </p>
-
-      <p>
-        C’est dans cette optique que j’ai choisi de consacrer ma veille
-        technologique à l’intelligence artificielle, et plus particulièrement
-        à ses applications récentes dans le développement informatique,
-        la génération de contenu et l’automatisation des tâches.
-      </p>
-
-      <p>
-        Pour réaliser cette veille, j’utilise différents outils et sources
-        d’information tels que Feedly et Google Alerts.
-      </p>
+      <p>Outils utilisés pour la veille :</p>
+      <div class="tag-row">
+        <span class="tag">Feedly</span>
+        <span class="tag">Google Alerts</span>
+      </div>
     </div>
-  </section>
+  </div>
 
-  <!-- EPREUVE -->
-  <section id="test">
-    <h2 class="section-title">Épreuve</h2>
-
-    <div class="project-card">
-      <h3>Épreuve E5</h3>
-
+  <!-- ÉPREUVE -->
+  <div class="section-wrap" id="test">
+    <p class="section-label">Certification</p>
+    <h2 class="section-title">Épreuve E4</h2>
+    <div class="card">
+      <h3>Présentation de l'épreuve</h3>
       <p>
-        L'épreuve E5 est une évaluation des compétences informatiques.
-        Elle permet au jury d'évaluer ma capacité à mobiliser des
-        compétences techniques à travers des situations professionnelles
-        réelles (stages, projets, missions).
+        L'épreuve E4 évalue la capacité à mobiliser des compétences techniques
+        à travers des situations professionnelles réelles (stages, projets, missions).
+        Le support est constitué de deux réalisations professionnelles choisies par le candidat.
       </p>
+      <p>Durée de l'oral : <strong>environ 40 minutes</strong>, avec période de préparation.</p>
 
-      <p>
-        Le support de l'épreuve sera issu de deux réalisations
-        professionnelles choisies par le candidat et consignées
-        dans un dossier.
-      </p>
-
-      <p>
-        L'épreuve orale a une durée d'environ 40 minutes,
-        avec une période de préparation.
-      </p>
-
-      <h3>Les 3 étapes de l'oral</h3>
-
-      <p>
-        1) Présentation des réalisations et exposition des contextes,
-        objectifs et résultats.
-      </p>
-
-      <p>
-        2) Questions du jury afin de vérifier la maîtrise des compétences
-        techniques et comportementales.
-      </p>
-
-      <p>
-        3) Évaluation du niveau de maîtrise selon une grille d’appréciation.
-      </p>
+      <div class="steps">
+        <div class="step">
+          <div class="step-num">1</div>
+          <div class="step-body">Présentation des réalisations : contexte, objectifs et résultats obtenus.</div>
+        </div>
+        <div class="step">
+          <div class="step-num">2</div>
+          <div class="step-body">Questions du jury pour vérifier la maîtrise des compétences techniques et comportementales.</div>
+        </div>
+        <div class="step">
+          <div class="step-num">3</div>
+          <div class="step-body">Évaluation du niveau de maîtrise selon une grille d'appréciation.</div>
+        </div>
+      </div>
     </div>
-  </section>
+  </div>
 
   <!-- CONTACT -->
-  <section id="contact">
+  <div class="section-wrap" id="contact">
+    <p class="section-label">Me joindre</p>
     <h2 class="section-title">Contact</h2>
-
-    <div class="project-card">
-      <p>
-        <strong>Email :</strong> chriselliotbricky@gmail.com
-      </p>
-
-      <p>
-        <strong>Téléphone :</strong> 07 58 31 93 37
-      </p>
+    <div class="contact-grid">
+      <div class="contact-item">
+        <div class="contact-icon">
+          <svg viewBox="0 0 24 24"><rect x="2" y="4" width="20" height="16" rx="2"/><polyline points="2,4 12,13 22,4"/></svg>
+        </div>
+        <div>
+          <div class="contact-label">Email</div>
+          <div class="contact-value">chriselliotbricky@gmail.com</div>
+        </div>
+      </div>
+      <div class="contact-item">
+        <div class="contact-icon">
+          <svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.07 12a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 2.98 1.2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.09 8.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7a2 2 0 0 1 1.72 2.02z"/></svg>
+        </div>
+        <div>
+          <div class="contact-label">Téléphone</div>
+          <div class="contact-value">07 58 31 93 37</div>
+        </div>
+      </div>
     </div>
-  </section>
+  </div>
 
   <!-- FOOTER -->
   <footer>
-    2026 — Chris-Elliot Bricky Matofaly
+    &copy; 2026 — <strong>Chris-Elliot Bricky Matofaly</strong>
   </footer>
 
 </body>
